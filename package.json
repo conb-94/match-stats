@@ -1,0 +1,25 @@
+{
+  "name": "match-stats",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"src/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs dist 4173",
+    "e2e": "node scripts/build.mjs && node node_modules/playwright/cli.js test",
+    "icons": "node scripts/icons.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "playwright": "1.56.0",
+    "sharp": "*",
+    "@types/node": "*",
+    "typescript": "6.0.3"
+  }
+}
