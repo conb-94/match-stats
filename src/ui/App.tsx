@@ -11,6 +11,7 @@ import { Goal } from './screens/Goal.tsx';
 import { MatchLog } from './screens/MatchLog.tsx';
 import { FullTime } from './screens/FullTime.tsx';
 import { KickOff } from './screens/KickOff.tsx';
+import { HomeScreenHint } from './components/HomeScreenHint.tsx';
 
 export type { Nav, Screen } from './nav.ts';
 
@@ -40,6 +41,7 @@ export function App(props: { initialScreen?: Screen }): ReactElement {
   return (
     <div className="screen">
       {store.saveFailed() ? <div className="banner" role="status">Could not save. Back up your data in Settings.</div> : null}
+      {live ? null : <HomeScreenHint />}
       {render(screen, nav)}
       {showTabs && team ? (
         <nav className="tabs" aria-label="Main">

@@ -170,3 +170,5 @@ button:disabled { cursor: default; }
 abbr { text-decoration: none; }
 .period-btn:disabled { opacity: 0.5; }
 .kickoff-btn { background: var(--green); border-color: var(--green); font-weight: 700; padding: 0 22px; }
+.hint-banner { background: #fff6dd; border-bottom: 1px solid #e8d49a; padding: 10px 16px; display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.4; }
+.hint-banner p { margin: 0; flex: 1; }
