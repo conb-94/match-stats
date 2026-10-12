@@ -10,6 +10,7 @@ import { Sub } from './screens/Sub.tsx';
 import { Goal } from './screens/Goal.tsx';
 import { MatchLog } from './screens/MatchLog.tsx';
 import { FullTime } from './screens/FullTime.tsx';
+import { KickOff } from './screens/KickOff.tsx';
 
 export type { Nav, Screen } from './nav.ts';
 
@@ -56,7 +57,8 @@ export function App(props: { initialScreen?: Screen }): ReactElement {
 function render(screen: Screen, nav: Nav): ReactElement {
   switch (screen.name) {
     case 'settings': return <Settings nav={nav} />;
-    case 'pick': return <PickTeam nav={nav} />;
+    case 'pick': return <PickTeam nav={nav} draft={screen.draft} />;
+    case 'kickoff': return <KickOff nav={nav} draft={screen.draft} />;
     case 'season': return <Season nav={nav} />;
     case 'live': return <Live nav={nav} />;
     case 'sub': return <Sub nav={nav} />;

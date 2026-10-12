@@ -1,23 +1,20 @@
 import { useState, type ReactElement } from 'react';
-import { useAppState, useStore } from '../../state/store.ts';
+import { useAppState } from '../../state/store.ts';
 import { activeTeam, squad } from '../../state/selectors.ts';
 import type { Id } from '../../domain/types.ts';
-import type { Nav } from '../nav.ts';
+import type { Draft, Nav } from '../nav.ts';
 import { Header } from '../components/Header.tsx';
 import { PlayerCard } from '../components/PlayerCard.tsx';
-import { errorMessage } from '../messages.ts';
 
 type Status = 'bench' | 'start' | 'out';
 const NEXT: Record<Status, Status> = { bench: 'start', start: 'out', out: 'bench' };
 
-export function PickTeam(props: { nav: Nav }): ReactElement {
+export function PickTeam(props: { nav: Nav; draft?: Draft }): ReactElement {
   const state = useAppState();
-  const store = useStore();
   const team = activeTeam(state)!;
   const players = squad(team);
-  const [status, setStatus] = useState<Record<Id, Status>>({});
-  const [opposition, setOpposition] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<Record<Id, Status>>(props.draft?.status ?? {});
+  const [opposition, setOpposition] = useState(props.draft?.opposition ?? '');
 
   const of = (id: Id): Status => status[id] ?? 'bench';
   const starters = players.filter((p) => of(p.id) === 'start').map((p) => p.id);
@@ -26,17 +23,12 @@ export function PickTeam(props: { nav: Nav }): ReactElement {
   const ready = starters.length === team.format;
   const tooFew = players.length < team.format;
 
-  const start = () => {
-    const code = store.dispatch({ type: 'match/start', opposition, starters, bench });
-    if (code) setError(errorMessage(code));
-    else props.nav.go({ name: 'live' });
-  };
+  const next = () => props.nav.go({ name: 'kickoff', draft: { opposition, status } });
 
   return (
     <>
       <Header title="Pick the team" subtitle={`${team.name} · ${team.format} a side`} />
       <main className="screen-body">
-        {error ? <div className="alert" role="alert">{error}</div> : null}
         <div className="field">
           <label htmlFor="opposition">Playing against</label>
           <input id="opposition" className="input" value={opposition} maxLength={30} placeholder="Opposition" autoComplete="off" onChange={(e) => setOpposition(e.target.value)} />
@@ -71,7 +63,7 @@ export function PickTeam(props: { nav: Nav }): ReactElement {
         </div>
       </main>
       <div className="bottom-bar single">
-        <button type="button" className="btn primary" disabled={!ready} onClick={start}>Start match</button>
+        <button type="button" className="btn primary" disabled={!ready} onClick={next}>Next</button>
       </div>
     </>
   );

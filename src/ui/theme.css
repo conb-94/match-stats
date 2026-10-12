@@ -169,3 +169,4 @@ button:disabled { cursor: default; }
 .table .good { color: var(--green); }
 abbr { text-decoration: none; }
 .period-btn:disabled { opacity: 0.5; }
+.kickoff-btn { background: var(--green); border-color: var(--green); font-weight: 700; padding: 0 22px; }

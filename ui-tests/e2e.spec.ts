@@ -21,7 +21,8 @@ test('a whole match from first run, surviving a reload and going offline', async
   // 2. Pick the team and start.
   await page.getByRole('button', { name: 'New match' }).click();
   for (const name of ['1 Sam', '2 Ollie', '3 Jack']) await page.getByRole('button', { name }).click();
-  await page.getByRole('button', { name: 'Start match' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByRole('button', { name: 'Kick off' }).click();
   await expect(page.getByTestId('match-clock')).toBeVisible();
 
   // 3. Reload: still the live match, clock not behind.

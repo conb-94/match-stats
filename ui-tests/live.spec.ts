@@ -57,7 +57,7 @@ test('undo at kick off asks before cancelling the match', async ({ page }) => {
   await expect(page.getByTestId('match-clock')).toBeVisible();
   await page.getByRole('button', { name: 'Undo' }).click();
   await page.getByRole('dialog').getByRole('button', { name: 'Cancel match' }).click();
-  await expect(page.getByRole('button', { name: 'Start match' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Next' })).toBeVisible();
 });
 
 test('full time asks first, then shows the summary', async ({ page }) => {

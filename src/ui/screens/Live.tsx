@@ -97,7 +97,7 @@ export function Live(props: { nav: Nav }): ReactElement {
   );
 }
 
-function PlayerSection(props: { team: Team; label: string; hint: string; ids: Id[]; playedMs: Record<Id, number>; tone: 'pitch' | 'bench' }): ReactElement {
+export function PlayerSection(props: { team: Team; label: string; hint: string; ids: Id[]; playedMs: Record<Id, number>; tone: 'pitch' | 'bench' }): ReactElement {
   const title = `${props.label} · ${props.ids.length}`;
   return (
     <section className="section" aria-label={title}>
